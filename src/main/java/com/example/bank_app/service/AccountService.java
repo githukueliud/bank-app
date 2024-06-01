@@ -10,4 +10,6 @@ public interface AccountService {
     AccountDto getAccountById(long id);
 
     AccountDto deposit(long id, double amount);
+
+    AccountDto withdraw(long id, double amount);
 }
