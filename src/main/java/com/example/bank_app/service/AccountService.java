@@ -6,4 +6,6 @@ import com.example.bank_app.dto.AccountDto;
 public interface AccountService {
 
     AccountDto createAccount(AccountDto accountDto);
+
+    AccountDto getAccountById(long id);
 }

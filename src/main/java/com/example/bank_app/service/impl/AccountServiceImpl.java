@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class AccountServiceImpl implements AccountService {
     //dependency injection
-    private AccountRepository accountRepository;
+    private final AccountRepository accountRepository;
 
     public AccountServiceImpl(AccountRepository accountRepository) {
         this.accountRepository = accountRepository;
@@ -22,5 +22,13 @@ public class AccountServiceImpl implements AccountService {
         Account account = AccountMapper.mapTOAccount(accountDto);
         Account savedAccount = accountRepository.save(account);
         return AccountMapper.mapTOAccountDto(savedAccount);
+    }
+
+    @Override
+    public AccountDto getAccountById(long id) {
+
+        Account account = accountRepository.findById(id)
+                .orElseThrow(()-> new RuntimeException("Account does not exist!"));
+        return AccountMapper.mapTOAccountDto(account);
     }
 }
