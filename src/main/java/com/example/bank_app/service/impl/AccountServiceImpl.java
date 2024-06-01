@@ -31,4 +31,15 @@ public class AccountServiceImpl implements AccountService {
                 .orElseThrow(()-> new RuntimeException("Account does not exist!"));
         return AccountMapper.mapTOAccountDto(account);
     }
+
+    @Override
+    public AccountDto deposit(long id, double amount) {
+        Account account = accountRepository.findById(id)
+                .orElseThrow(()-> new RuntimeException("Account does not exist!"));
+
+        double newAmount = account.getBalance() + amount;
+        account.setBalance(newAmount);
+        accountRepository.save(account);
+        return AccountMapper.mapTOAccountDto(account);
+    }
 }
